@@ -64,8 +64,6 @@ npm install
 npm run dev
 ```
 
-The application will start immediately at:
-👉 **http://localhost:3000**
 
 ---
 
