@@ -439,6 +439,10 @@ export const UploadMedia: React.FC<UploadMediaProps> = ({ onAnalysisComplete, de
                 </label>
               ))}
             </div>
+            <p className="text-[11px] text-teal-700 bg-teal-50 border border-teal-200 p-2 rounded-lg mt-2 flex items-center gap-1.5">
+              <span className="font-bold">Strict OSHA 1910.138 Rule:</span>
+              Bare hands or missing safety gloves are flagged as immediate high-priority violations.
+            </p>
           </div>
 
           {/* Model Confidence Slider */}

@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
 // Secret key for HMAC token signing (configurable via environment variable)
 const JWT_SECRET = process.env.SECRET_KEY || 'safeguard-vision-jwt-secret-key-2026';

@@ -1,6 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 import fs from 'node:fs';
+import { hashPassword } from './auth.ts';
 
 const DB_PATH = path.resolve(process.cwd(), 'data', 'safety_platform.db');
 
@@ -118,8 +119,6 @@ export function initDatabase() {
   seedInitialData();
 }
 
-import { hashPassword } from './auth';
-
 function seedInitialData() {
   // Check if admin user exists
   const userCheck = db.prepare(`SELECT count(*) as count FROM users`).get() as { count: number };
@@ -154,8 +153,8 @@ function seedInitialData() {
       weights: {
         helmet: 30,
         vest: 25,
-        gloves: 15,
-        safety_shoes: 20,
+        gloves: 20,
+        safety_shoes: 15,
         goggles: 10,
       },
       riskThresholds: {
@@ -175,6 +174,18 @@ function seedInitialData() {
       INSERT INTO policies (id, version, industry_type, is_active, policy_json, updated_at)
       VALUES (?, ?, ?, 1, ?, ?)
     `).run('pol-default-01', 'v2.4-Standard-OSHA', 'General Industrial & Construction', JSON.stringify(defaultPolicy), new Date().toISOString());
+  } else {
+    // Ensure active policy includes updated gloves weight
+    try {
+      const activePol = db.prepare(`SELECT id, policy_json FROM policies WHERE is_active = 1 LIMIT 1`).get() as any;
+      if (activePol) {
+        const conf = JSON.parse(activePol.policy_json);
+        if (conf.weights && conf.weights.gloves !== 20) {
+          conf.weights.gloves = 20;
+          db.prepare(`UPDATE policies SET policy_json = ? WHERE id = ?`).run(JSON.stringify(conf), activePol.id);
+        }
+      }
+    } catch (e) {}
   }
 
   // Check if initial sample media & analysis exists

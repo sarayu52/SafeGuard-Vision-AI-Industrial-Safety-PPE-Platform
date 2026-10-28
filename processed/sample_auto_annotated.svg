@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#0f172a" />
+    <!-- Epoxy Factory Floor -->
+    <rect y="460" width="1280" height="260" fill="#1e293b" />
+    <line x1="0" y1="460" x2="1280" y2="460" stroke="#eab308" stroke-width="6" stroke-dasharray="25,25" />
+
+    <!-- Robotic Welding Arms in Background -->
+    <path d="M180,460 L240,300 L340,240 L380,340" fill="none" stroke="#ea580c" stroke-width="16" stroke-linecap="round" />
+    <circle cx="340" cy="240" r="18" fill="#c2410c" />
+    <path d="M1020,460 L960,280 L860,220 L820,310" fill="none" stroke="#ea580c" stroke-width="16" stroke-linecap="round" />
+
+    <!-- Vehicle Body Chassis on Conveyor -->
+    <rect x="360" y="320" width="520" height="150" fill="#334155" stroke="#64748b" stroke-width="4" rx="10" />
+    <rect x="420" y="340" width="140" height="70" fill="#1e293b" rx="4" />
+    <rect x="620" y="340" width="140" height="70" fill="#1e293b" rx="4" />
+
+    <!-- Assembly Operator Silhouette -->
+    <g id="auto-operator">
+      <path d="M580,245 C580,225 640,225 640,245 Z" fill="#3b82f6" />
+      <circle cx="610" cy="265" r="22" fill="#fcd34d" />
+      <!-- Company Work Uniform -->
+      <path d="M560,295 L660,295 L650,480 L570,480 Z" fill="#1d4ed8" />
+      <rect x="580" y="480" width="28" height="140" fill="#1e293b" />
+      <rect x="620" y="480" width="28" height="140" fill="#1e293b" />
+      <!-- Bare Hands handling sheet metal (VIOLATION) -->
+      <circle cx="535" cy="430" r="12" fill="#fcd34d" />
+      <circle cx="685" cy="430" r="12" fill="#fcd34d" />
+    </g>
+
+    <rect x="20" y="20" width="460" height="36" fill="rgba(15, 23, 42, 0.85)" rx="6" />
+    <circle cx="38" cy="38" r="5" fill="#3b82f6" />
+    <text x="52" y="42" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+      DETROIT AUTO WORKS · ROBOTIC WELDING CELL 08 FEED
+    </text>
+
+    
+    <!-- Worker #1 [Track 04]: Missing Gloves Violation -->
+    <g id="worker-0">
+      <rect x="520" y="220" width="200" height="430" fill="rgba(245, 158, 11, 0.08)" stroke="#f59e0b" stroke-width="3" rx="4" />
+      <rect x="520" y="190" width="230" height="26" fill="rgba(245, 158, 11, 0.92)" rx="3" />
+      <text x="528" y="207" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+        Operator [Track 04] · Warning (88%)
+      </text>
+      <!-- Helmet box: OK -->
+      <rect x="560" y="215" width="120" height="85" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" />
+      <text x="565" y="232" fill="#10b981" font-family="sans-serif" font-size="10" font-weight="bold">BUMP CAP OK</text>
+      <!-- Hands box: Missing Kevlar Gloves -->
+      <rect x="510" y="410" width="220" height="70" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,2" />
+      <text x="515" y="428" fill="#ef4444" font-family="sans-serif" font-size="10" font-weight="bold">MISSING KEVLAR GLOVES</text>
+    </g>
+  
+  </svg>

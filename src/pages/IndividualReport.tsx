@@ -481,11 +481,24 @@ export const IndividualReport: React.FC<IndividualReportProps> = ({
                       : 'rgba(245, 158, 11, 0.92)';
 
                     // Sub-boxes
-                    const helmetBox = { x: x + bw * 0.18, y: y - 2, w: bw * 0.64, h: bh * 0.22 };
-                    const vestBox = { x: x + bw * 0.12, y: y + bh * 0.22, w: bw * 0.76, h: bh * 0.42 };
+                    const helmetBox = { x: x + bw * 0.18, y: y - 2, w: bw * 0.64, h: bh * 0.20 };
+                    const gogglesBox = { x: x + bw * 0.24, y: y + bh * 0.08, w: bw * 0.52, h: bh * 0.10 };
+                    const vestBox = { x: x + bw * 0.10, y: y + bh * 0.20, w: bw * 0.80, h: bh * 0.40 };
+                    const glovesLeftBox = { x: x - bw * 0.08, y: y + bh * 0.44, w: bw * 0.26, h: bh * 0.18 };
+                    const glovesRightBox = { x: x + bw * 0.82, y: y + bh * 0.44, w: bw * 0.26, h: bh * 0.18 };
+                    const shoesBox = { x: x + bw * 0.06, y: y + bh * 0.82, w: bw * 0.88, h: bh * 0.18 };
 
                     const helmet = w.ppeChecks['helmet'];
+                    const goggles = w.ppeChecks['goggles'];
                     const vest = w.ppeChecks['vest'];
+                    const gloves = w.ppeChecks['gloves'];
+                    const shoes = w.ppeChecks['safety_shoes'];
+
+                    const helmetColor = helmet?.status === 'violation' ? '#ef4444' : helmet?.status === 'compliant' ? '#10b981' : '#f59e0b';
+                    const gogglesColor = goggles?.status === 'violation' ? '#ef4444' : goggles?.status === 'compliant' ? '#10b981' : '#f59e0b';
+                    const vestColor = vest?.status === 'violation' ? '#ef4444' : vest?.status === 'compliant' ? '#10b981' : '#f59e0b';
+                    const glovesColor = gloves?.status === 'violation' ? '#ef4444' : gloves?.status === 'compliant' ? '#10b981' : '#f59e0b';
+                    const shoesColor = shoes?.status === 'violation' ? '#ef4444' : shoes?.status === 'compliant' ? '#10b981' : '#f59e0b';
 
                     return (
                       <g key={w.id} className="transition-all">
@@ -505,7 +518,7 @@ export const IndividualReport: React.FC<IndividualReportProps> = ({
                         <rect
                           x={x}
                           y={Math.max(10, y - 28)}
-                          width={Math.max(200, bw)}
+                          width={Math.max(220, bw)}
                           height={26}
                           fill={bgHeader}
                           rx="4"
@@ -528,11 +541,48 @@ export const IndividualReport: React.FC<IndividualReportProps> = ({
                           width={helmetBox.w}
                           height={helmetBox.h}
                           fill="none"
-                          stroke={helmet?.status === 'violation' ? '#ef4444' : '#10b981'}
+                          stroke={helmetColor}
                           strokeWidth="2"
                           strokeDasharray="4,2"
                           rx="2"
                         />
+                        <text
+                          x={helmetBox.x + 4}
+                          y={helmetBox.y + 14}
+                          fill={helmetColor}
+                          fontFamily="system-ui, sans-serif"
+                          fontSize="10"
+                          fontWeight="bold"
+                        >
+                          Helmet: {helmet?.status === 'compliant' ? 'OK' : helmet?.status === 'violation' ? 'MISSING' : 'UNVERIFIED'}
+                        </text>
+
+                        {/* Sub-box: Goggles */}
+                        {goggles && (
+                          <g>
+                            <rect
+                              x={gogglesBox.x}
+                              y={gogglesBox.y}
+                              width={gogglesBox.w}
+                              height={gogglesBox.h}
+                              fill="none"
+                              stroke={gogglesColor}
+                              strokeWidth="1.5"
+                              strokeDasharray="3,2"
+                              rx="2"
+                            />
+                            <text
+                              x={gogglesBox.x + 2}
+                              y={gogglesBox.y + 10}
+                              fill={gogglesColor}
+                              fontFamily="system-ui, sans-serif"
+                              fontSize="9"
+                              fontWeight="bold"
+                            >
+                              Eyes: {goggles.status === 'compliant' ? 'OK' : goggles.status === 'violation' ? 'MISSING' : 'UNVERIFIED'}
+                            </text>
+                          </g>
+                        )}
 
                         {/* Sub-box: Vest */}
                         <rect
@@ -541,11 +591,86 @@ export const IndividualReport: React.FC<IndividualReportProps> = ({
                           width={vestBox.w}
                           height={vestBox.h}
                           fill="none"
-                          stroke={vest?.status === 'violation' ? '#ef4444' : '#10b981'}
+                          stroke={vestColor}
                           strokeWidth="2"
                           strokeDasharray="4,2"
                           rx="2"
                         />
+                        <text
+                          x={vestBox.x + 4}
+                          y={vestBox.y + 16}
+                          fill={vestColor}
+                          fontFamily="system-ui, sans-serif"
+                          fontSize="10"
+                          fontWeight="bold"
+                        >
+                          Vest: {vest?.status === 'compliant' ? 'OK' : vest?.status === 'violation' ? 'MISSING' : 'UNVERIFIED'}
+                        </text>
+
+                        {/* Sub-boxes: Hands / Gloves */}
+                        <rect
+                          x={glovesLeftBox.x}
+                          y={glovesLeftBox.y}
+                          width={glovesLeftBox.w}
+                          height={glovesLeftBox.h}
+                          fill={gloves?.status === 'violation' ? 'rgba(239, 68, 68, 0.20)' : 'none'}
+                          stroke={glovesColor}
+                          strokeWidth="2"
+                          strokeDasharray="3,2"
+                          rx="3"
+                        />
+                        <rect
+                          x={glovesRightBox.x}
+                          y={glovesRightBox.y}
+                          width={glovesRightBox.w}
+                          height={glovesRightBox.h}
+                          fill={gloves?.status === 'violation' ? 'rgba(239, 68, 68, 0.20)' : 'none'}
+                          stroke={glovesColor}
+                          strokeWidth="2"
+                          strokeDasharray="3,2"
+                          rx="3"
+                        />
+                        <rect
+                          x={Math.max(10, glovesLeftBox.x - 10)}
+                          y={glovesLeftBox.y + glovesLeftBox.h + 2}
+                          width={Math.max(160, bw * 0.8)}
+                          height={18}
+                          fill={gloves?.status === 'violation' ? '#ef4444' : gloves?.status === 'compliant' ? '#10b981' : '#f59e0b'}
+                          rx="3"
+                        />
+                        <text
+                          x={Math.max(14, glovesLeftBox.x - 6)}
+                          y={glovesLeftBox.y + glovesLeftBox.h + 14}
+                          fill="#ffffff"
+                          fontFamily="system-ui, sans-serif"
+                          fontSize="9"
+                          fontWeight="bold"
+                        >
+                          GLOVES: {gloves?.status === 'compliant' ? 'VERIFIED OK' : gloves?.status === 'violation' ? 'MISSING / BARE HANDS' : 'UNVERIFIED'}
+                        </text>
+
+                        {/* Sub-box: Shoes */}
+                        <rect
+                          x={shoesBox.x}
+                          y={shoesBox.y}
+                          width={shoesBox.w}
+                          height={shoesBox.h}
+                          fill="none"
+                          stroke={shoesColor}
+                          strokeWidth="1.5"
+                          strokeDasharray="3,2"
+                          rx="2"
+                        />
+                        <text
+                          x={shoesBox.x + 4}
+                          y={shoesBox.y + 14}
+                          fill={shoesColor}
+                          fontFamily="system-ui, sans-serif"
+                          fontSize="9"
+                          fontWeight="bold"
+                        >
+                          Boots: {shoes?.status === 'compliant' ? 'OK' : shoes?.status === 'violation' ? 'MISSING' : 'UNVERIFIED'}
+                        </text>
                       </g>
                     );
                   })}
@@ -629,32 +754,58 @@ export const IndividualReport: React.FC<IndividualReportProps> = ({
               {/* Itemized PPE checklist */}
               <div className="space-y-2">
                 {Object.entries(selectedWorker.ppeChecks).map(([ppeKey, check]) => {
+                  const isGloveViolation = ppeKey === 'gloves' && check.status === 'violation';
                   return (
                     <div
                       key={ppeKey}
-                      className="p-2.5 bg-white border border-slate-200 rounded-lg flex items-center justify-between"
+                      className={`p-2.5 rounded-lg border transition-all ${
+                        check.status === 'violation'
+                          ? 'bg-red-50/60 border-red-200'
+                          : check.status === 'compliant'
+                          ? 'bg-white border-slate-200'
+                          : 'bg-amber-50/50 border-amber-200'
+                      }`}
                     >
-                      <div className="flex items-center gap-2">
-                        {check.status === 'compliant' ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                        ) : check.status === 'violation' ? (
-                          <XCircle className="w-4 h-4 text-red-500" />
-                        ) : (
-                          <HelpCircle className="w-4 h-4 text-amber-500" />
-                        )}
-                        <div>
-                          <p className="text-xs font-semibold text-slate-800 capitalize">
-                            {ppeKey.replace('_', ' ')}
-                          </p>
-                          <p className="text-[10px] text-slate-400">{check.label}</p>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          {check.status === 'compliant' ? (
+                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                          ) : check.status === 'violation' ? (
+                            <XCircle className="w-4 h-4 text-red-500 shrink-0" />
+                          ) : (
+                            <HelpCircle className="w-4 h-4 text-amber-500 shrink-0" />
+                          )}
+                          <div>
+                            <p className="text-xs font-semibold text-slate-800 capitalize flex items-center gap-1.5">
+                              <span>{ppeKey.replace('_', ' ')}</span>
+                              {check.status === 'violation' && (
+                                <span className="text-[9px] font-bold px-1.5 py-0.2 rounded bg-red-100 text-red-700">
+                                  VIOLATION
+                                </span>
+                              )}
+                            </p>
+                            <p className={`text-[10px] ${check.status === 'violation' ? 'text-red-600 font-medium' : 'text-slate-400'}`}>
+                              {check.label}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-xs font-bold font-mono text-slate-700">
+                            {Math.round(check.confidence * 100)}%
+                          </span>
+                          <p className="text-[9px] text-slate-400">Model Conf.</p>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <span className="text-xs font-bold font-mono text-slate-700">
-                          {Math.round(check.confidence * 100)}%
-                        </span>
-                        <p className="text-[9px] text-slate-400">Confidence</p>
-                      </div>
+
+                      {/* Explicit Hand Protection Hazard Alert for Missing Gloves */}
+                      {isGloveViolation && (
+                        <div className="mt-2 pt-2 border-t border-red-200/80 text-[10px] text-red-700 bg-red-100/50 p-1.5 rounded flex items-start gap-1.5">
+                          <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0 mt-0.5" />
+                          <span>
+                            <strong>OSHA 1910.138 Hand Hazard:</strong> Bare hands detected in machinery/handling zone. Worker requires certified cut, abrasion, or chemical-resistant safety gloves.
+                          </span>
+                        </div>
+                      )}
                     </div>
                   );
                 })}

@@ -1,0 +1,85 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <defs>
+        <linearGradient id="hudGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.92" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Real Original Image Background Layer: Embedded Base64 Data URI ensures it is NEVER blacked out! -->
+      <image href="/app/applet/uploads/sample_auto_assembly.mp4" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+
+      <!-- Top HUD Watermark -->
+      <rect x="16" y="16" width="430" height="42" fill="url(#hudGrad)" rx="6" stroke="#334155" stroke-width="1" />
+      <circle cx="34" cy="37" r="6" fill="#10b981" />
+      <text x="50" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">
+        SAFEGUARD AI · YOLOv8 PPE ANALYZER
+      </text>
+      <text x="50" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">
+        Site: Detroit Auto Works Plant 3 · Real-time Spatial Hand, Torso &amp; Head Association
+      </text>
+
+      
+      <!-- Worker Container Track 01 -->
+      <g id="worker-0" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="71" y="164" width="213" height="458"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#ef4444" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill with Track ID & Violation Status -->
+        <rect x="71" y="136" width="220" height="26"
+              fill="rgba(239, 68, 68, 0.95)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="79" y="153" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #1 [Track 01] · Violation detected
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="109.34" y="162" width="136.32" height="91.60000000000001"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="113.34" y="176" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: OK
+        </text>
+
+        <!-- Eyes / Goggles Region -->
+        
+        <rect x="122.12" y="200.64" width="110.76" height="45.800000000000004"
+              fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+        <text x="124.12" y="210.64" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          Eyes: UNVERIFIED
+        </text>
+        
+
+        <!-- Torso / Vest Region -->
+        <rect x="92.3" y="255.60000000000002" width="170.4" height="183.20000000000002"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="96.3" y="271.6" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: OK
+        </text>
+
+        <!-- Left & Right Hands / Safety Gloves Regions -->
+        <rect x="53.96" y="365.52" width="55.38" height="82.44"
+              fill="rgba(239, 68, 68, 0.15)"
+              stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2" rx="3" />
+        <rect x="245.66" y="365.52" width="55.38" height="82.44"
+              fill="rgba(239, 68, 68, 0.15)"
+              stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2" rx="3" />
+        
+        <!-- Gloves Status Label on Wrist/Hand Zone -->
+        <rect x="43.96" y="449.96" width="170.4" height="18"
+              fill="#ef4444" rx="3" />
+        <text x="47.96" y="462.96"
+              fill="#ffffff" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          GLOVES: MISSING / BARE HANDS
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="83.78" y="539.56" width="187.44" height="82.44"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+        <text x="87.78" y="553.56" fill="#10b981" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          Boots: OK
+        </text>
+      </g>
+    
+    </svg>
+  

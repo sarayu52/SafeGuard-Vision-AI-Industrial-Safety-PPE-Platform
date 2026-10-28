@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <rect width="1280" height="720" fill="#1e293b" />
+    <!-- High-Bay Racking Shelves -->
+    <g stroke="#ea580c" stroke-width="6" opacity="0.8">
+      <line x1="80" y1="40" x2="80" y2="700" /><line x1="280" y1="40" x2="280" y2="700" />
+      <line x1="1000" y1="40" x2="1000" y2="700" /><line x1="1200" y1="40" x2="1200" y2="700" />
+      <line x1="80" y1="160" x2="280" y2="160" stroke="#f97316" stroke-width="8" />
+      <line x1="80" y1="320" x2="280" y2="320" stroke="#f97316" stroke-width="8" />
+      <line x1="1000" y1="180" x2="1200" y2="180" stroke="#f97316" stroke-width="8" />
+      <line x1="1000" y1="340" x2="1200" y2="340" stroke="#f97316" stroke-width="8" />
+    </g>
+
+    <!-- Stacked Wooden Pallets -->
+    <rect x="100" y="100" width="160" height="50" fill="#ca8a04" rx="4" />
+    <rect x="100" y="260" width="160" height="50" fill="#ca8a04" rx="4" />
+    <rect x="1020" y="120" width="160" height="50" fill="#ca8a04" rx="4" />
+
+    <!-- Yellow Floor Warning Striping -->
+    <rect y="500" width="1280" height="220" fill="#334155" />
+    <line x1="300" y1="500" x2="980" y2="500" stroke="#eab308" stroke-width="8" />
+    <line x1="300" y1="700" x2="980" y2="700" stroke="#eab308" stroke-width="8" />
+
+    <!-- Warehouse Forklift Silhouette -->
+    <rect x="540" y="400" width="140" height="180" fill="#eab308" rx="8" />
+    <rect x="520" y="340" width="80" height="120" fill="none" stroke="#000000" stroke-width="6" />
+    <circle cx="560" cy="580" r="26" fill="#0f172a" />
+    <circle cx="660" cy="580" r="26" fill="#0f172a" />
+
+    <!-- Warehouse Workers with High-Vis -->
+    <g id="warehouse-worker-1">
+      <path d="M400,280 C400,260 450,260 450,280 Z" fill="#eab308" />
+      <circle cx="425" cy="295" r="18" fill="#fbcfe8" />
+      <path d="M390,320 L460,320 L450,470 L400,470 Z" fill="#84cc16" />
+      <rect x="405" y="470" width="20" height="150" fill="#1e293b" />
+      <rect x="435" y="470" width="20" height="150" fill="#1e293b" />
+    </g>
+
+    <g id="warehouse-worker-2">
+      <path d="M840,260 C840,240 890,240 890,260 Z" fill="#eab308" />
+      <circle cx="865" cy="275" r="18" fill="#fed7aa" />
+      <path d="M830,300 L900,300 L890,460 L840,460 Z" fill="#f97316" />
+      <rect x="845" y="460" width="20" height="160" fill="#1e293b" />
+      <rect x="875" y="460" width="20" height="160" fill="#1e293b" />
+    </g>
+
+    <rect x="20" y="20" width="460" height="36" fill="rgba(15, 23, 42, 0.85)" rx="6" />
+    <circle cx="38" cy="38" r="5" fill="#10b981" />
+    <text x="52" y="42" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+      CENTRAL LOGISTICS HUB · HIGH-BAY AISLE 12 SURVEILLANCE
+    </text>
+
+    
+    <!-- Worker #1 [Track 01]: Compliant -->
+    <g id="worker-0">
+      <rect x="340" y="260" width="170" height="400" fill="rgba(16, 185, 129, 0.08)" stroke="#10b981" stroke-width="3" rx="4" />
+      <rect x="340" y="230" width="210" height="26" fill="rgba(16, 185, 129, 0.92)" rx="3" />
+      <text x="348" y="247" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+        Worker #1 [Track 01] · Compliant (96%)
+      </text>
+    </g>
+    <!-- Worker #2 [Track 02]: Compliant -->
+    <g id="worker-1">
+      <rect x="780" y="240" width="170" height="420" fill="rgba(16, 185, 129, 0.08)" stroke="#10b981" stroke-width="3" rx="4" />
+      <rect x="780" y="210" width="210" height="26" fill="rgba(16, 185, 129, 0.92)" rx="3" />
+      <text x="788" y="227" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+        Worker #2 [Track 02] · Compliant (99%)
+      </text>
+    </g>
+  
+  </svg>

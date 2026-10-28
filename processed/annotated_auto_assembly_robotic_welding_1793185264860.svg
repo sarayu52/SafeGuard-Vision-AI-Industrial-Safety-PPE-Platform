@@ -1,0 +1,85 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <defs>
+        <linearGradient id="hudGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.92" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Real Original Image Background Layer: Embedded Base64 Data URI ensures it is NEVER blacked out! -->
+      <image href="data:image/jpeg;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgdmlld0JveD0iMCAwIDEyODAgNzIwIj4KICAgIDxyZWN0IHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjcyMCIgZmlsbD0iIzBmMTcyYSIgLz4KICAgIDwhLS0gRXBveHkgRmFjdG9yeSBGbG9vciAtLT4KICAgIDxyZWN0IHk9IjQ2MCIgd2lkdGg9IjEyODAiIGhlaWdodD0iMjYwIiBmaWxsPSIjMWUyOTNiIiAvPgogICAgPGxpbmUgeDE9IjAiIHkxPSI0NjAiIHgyPSIxMjgwIiB5Mj0iNDYwIiBzdHJva2U9IiNlYWIzMDgiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWRhc2hhcnJheT0iMjUsMjUiIC8+CgogICAgPCEtLSBSb2JvdGljIFdlbGRpbmcgQXJtcyBpbiBCYWNrZ3JvdW5kIC0tPgogICAgPHBhdGggZD0iTTE4MCw0NjAgTDI0MCwzMDAgTDM0MCwyNDAgTDM4MCwzNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2VhNTgwYyIgc3Ryb2tlLXdpZHRoPSIxNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPgogICAgPGNpcmNsZSBjeD0iMzQwIiBjeT0iMjQwIiByPSIxOCIgZmlsbD0iI2MyNDEwYyIgLz4KICAgIDxwYXRoIGQ9Ik0xMDIwLDQ2MCBMOTYwLDI4MCBMODYwLDIyMCBMODIwLDMxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWE1ODBjIiBzdHJva2Utd2lkdGg9IjE2IiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+CgogICAgPCEtLSBWZWhpY2xlIEJvZHkgQ2hhc3NpcyBvbiBDb252ZXlvciAtLT4KICAgIDxyZWN0IHg9IjM2MCIgeT0iMzIwIiB3aWR0aD0iNTIwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iIzMzNDE1NSIgc3Ryb2tlPSIjNjQ3NDhiIiBzdHJva2Utd2lkdGg9IjQiIHJ4PSIxMCIgLz4KICAgIDxyZWN0IHg9IjQyMCIgeT0iMzQwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjcwIiBmaWxsPSIjMWUyOTNiIiByeD0iNCIgLz4KICAgIDxyZWN0IHg9IjYyMCIgeT0iMzQwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjcwIiBmaWxsPSIjMWUyOTNiIiByeD0iNCIgLz4KCiAgICA8IS0tIEFzc2VtYmx5IE9wZXJhdG9yIFNpbGhvdWV0dGUgLS0+CiAgICA8ZyBpZD0iYXV0by1vcGVyYXRvciI+CiAgICAgIDxwYXRoIGQ9Ik01ODAsMjQ1IEM1ODAsMjI1IDY0MCwyMjUgNjQwLDI0NSBaIiBmaWxsPSIjM2I4MmY2IiAvPgogICAgICA8Y2lyY2xlIGN4PSI2MTAiIGN5PSIyNjUiIHI9IjIyIiBmaWxsPSIjZmNkMzRkIiAvPgogICAgICA8IS0tIENvbXBhbnkgV29yayBVbmlmb3JtIC0tPgogICAgICA8cGF0aCBkPSJNNTYwLDI5NSBMNjYwLDI5NSBMNjUwLDQ4MCBMNTcwLDQ4MCBaIiBmaWxsPSIjMWQ0ZWQ4IiAvPgogICAgICA8cmVjdCB4PSI1ODAiIHk9IjQ4MCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjE0MCIgZmlsbD0iIzFlMjkzYiIgLz4KICAgICAgPHJlY3QgeD0iNjIwIiB5PSI0ODAiIHdpZHRoPSIyOCIgaGVpZ2h0PSIxNDAiIGZpbGw9IiMxZTI5M2IiIC8+CiAgICAgIDwhLS0gQmFyZSBIYW5kcyBoYW5kbGluZyBzaGVldCBtZXRhbCAoVklPTEFUSU9OKSAtLT4KICAgICAgPGNpcmNsZSBjeD0iNTM1IiBjeT0iNDMwIiByPSIxMiIgZmlsbD0iI2ZjZDM0ZCIgLz4KICAgICAgPGNpcmNsZSBjeD0iNjg1IiBjeT0iNDMwIiByPSIxMiIgZmlsbD0iI2ZjZDM0ZCIgLz4KICAgIDwvZz4KCiAgICA8cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSI0NjAiIGhlaWdodD0iMzYiIGZpbGw9InJnYmEoMTUsIDIzLCA0MiwgMC44NSkiIHJ4PSI2IiAvPgogICAgPGNpcmNsZSBjeD0iMzgiIGN5PSIzOCIgcj0iNSIgZmlsbD0iIzNiODJmNiIgLz4KICAgIDx0ZXh0IHg9IjUyIiB5PSI0MiIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9InN5c3RlbS11aSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiPgogICAgICBERVRST0lUIEFVVE8gV09SS1MgwrcgUk9CT1RJQyBXRUxESU5HIENFTEwgMDggRkVFRAogICAgPC90ZXh0PgoKICAgIAogIDwvc3ZnPg==" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+
+      <!-- Top HUD Watermark -->
+      <rect x="16" y="16" width="430" height="42" fill="url(#hudGrad)" rx="6" stroke="#334155" stroke-width="1" />
+      <circle cx="34" cy="37" r="6" fill="#10b981" />
+      <text x="50" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">
+        SAFEGUARD AI · YOLOv8 PPE ANALYZER
+      </text>
+      <text x="50" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">
+        Site: Detroit Auto Works Plant 3 · Real-time Spatial Hand, Torso &amp; Head Association
+      </text>
+
+      
+      <!-- Worker Container Track 01 -->
+      <g id="worker-0" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="71" y="164" width="213" height="458"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#ef4444" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill with Track ID & Violation Status -->
+        <rect x="71" y="136" width="220" height="26"
+              fill="rgba(239, 68, 68, 0.95)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="79" y="153" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #1 [Track 01] · Violation detected
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="109.34" y="162" width="136.32" height="91.60000000000001"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="113.34" y="176" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: OK
+        </text>
+
+        <!-- Eyes / Goggles Region -->
+        
+        <rect x="122.12" y="200.64" width="110.76" height="45.800000000000004"
+              fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+        <text x="124.12" y="210.64" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          Eyes: UNVERIFIED
+        </text>
+        
+
+        <!-- Torso / Vest Region -->
+        <rect x="92.3" y="255.60000000000002" width="170.4" height="183.20000000000002"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="96.3" y="271.6" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: OK
+        </text>
+
+        <!-- Left & Right Hands / Safety Gloves Regions -->
+        <rect x="53.96" y="365.52" width="55.38" height="82.44"
+              fill="rgba(239, 68, 68, 0.15)"
+              stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2" rx="3" />
+        <rect x="245.66" y="365.52" width="55.38" height="82.44"
+              fill="rgba(239, 68, 68, 0.15)"
+              stroke="#ef4444" stroke-width="2" stroke-dasharray="3,2" rx="3" />
+        
+        <!-- Gloves Status Label on Wrist/Hand Zone -->
+        <rect x="43.96" y="449.96" width="170.4" height="18"
+              fill="#ef4444" rx="3" />
+        <text x="47.96" y="462.96"
+              fill="#ffffff" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          GLOVES: MISSING / BARE HANDS
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="83.78" y="539.56" width="187.44" height="82.44"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+        <text x="87.78" y="553.56" fill="#10b981" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">
+          Boots: OK
+        </text>
+      </g>
+    
+    </svg>
+  

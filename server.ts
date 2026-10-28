@@ -3,20 +3,21 @@ import path from 'node:path';
 import fs from 'node:fs';
 import multer from 'multer';
 import { createServer as createViteServer } from 'vite';
-import { initDatabase, db } from './server/database';
-import { executeMediaAnalysis } from './server/detectionService';
+import { initDatabase, db } from './server/database.ts';
+import { executeMediaAnalysis } from './server/detectionService.ts';
 import {
   verifyPassword,
+  hashPassword,
   createAuthToken,
   requireAuth,
   requireRole,
-  AuthRequest,
-} from './server/auth';
+} from './server/auth.ts';
+import type { AuthRequest } from './server/auth.ts';
 import {
   getConstructionSceneSvg,
   getAutoAssemblySceneSvg,
   getWarehouseSceneSvg,
-} from './server/sampleImages';
+} from './server/sampleImages.ts';
 
 // Initialize SQLite database
 initDatabase();
@@ -59,7 +60,7 @@ function ensureSampleAssets() {
 ensureSampleAssets();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -794,7 +795,6 @@ app.post('/api/users', requireAuth, requireRole(['admin']), (req, res) => {
       return res.status(400).json({ error: 'Email, name, and password are required' });
     }
 
-    const { hashPassword } = require('./server/auth');
     const id = `usr-${Date.now()}`;
     db.prepare(`
       INSERT INTO users (id, email, name, role, password_hash, created_at)
