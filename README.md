@@ -98,8 +98,7 @@ pip install -r requirements.txt
 python run.py
 ```
 
-The Flask API will run at:
-👉 **http://localhost:5000**
+
 
 ---
 
