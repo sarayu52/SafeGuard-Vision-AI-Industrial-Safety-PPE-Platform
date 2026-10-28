@@ -118,6 +118,8 @@ export function initDatabase() {
   seedInitialData();
 }
 
+import { hashPassword } from './auth';
+
 function seedInitialData() {
   // Check if admin user exists
   const userCheck = db.prepare(`SELECT count(*) as count FROM users`).get() as { count: number };
@@ -127,10 +129,19 @@ function seedInitialData() {
       VALUES (?, ?, ?, ?, ?, ?)
     `);
 
-    // Standard secure test accounts (admin, safety_manager, inspector)
-    insertUser.run('usr-admin-01', 'admin@safeguard.industrial', 'Chief Safety Officer (Admin)', 'admin', 'admin123', new Date().toISOString());
-    insertUser.run('usr-mgr-02', 'manager@safeguard.industrial', 'Marcus Vance (Safety Manager)', 'safety_manager', 'manager123', new Date().toISOString());
-    insertUser.run('usr-insp-03', 'inspector@safeguard.industrial', 'Elena Rostova (Site Inspector)', 'inspector', 'inspector123', new Date().toISOString());
+    // Standard cryptographically hashed accounts (admin, safety_manager, inspector)
+    insertUser.run('usr-admin-01', 'admin@safeguard.industrial', 'Chief Safety Officer (Admin)', 'admin', hashPassword('admin123'), new Date().toISOString());
+    insertUser.run('usr-mgr-02', 'manager@safeguard.industrial', 'Marcus Vance (Safety Manager)', 'safety_manager', hashPassword('manager123'), new Date().toISOString());
+    insertUser.run('usr-insp-03', 'inspector@safeguard.industrial', 'Elena Rostova (Site Inspector)', 'inspector', hashPassword('inspector123'), new Date().toISOString());
+  } else {
+    // Automatically migrate any legacy plain passwords to PBKDF2
+    const users = db.prepare(`SELECT id, password_hash FROM users`).all() as any[];
+    for (const u of users) {
+      if (!u.password_hash.startsWith('pbkdf2$')) {
+        const hashed = hashPassword(u.password_hash);
+        db.prepare(`UPDATE users SET password_hash = ? WHERE id = ?`).run(hashed, u.id);
+      }
+    }
   }
 
   // Check if default policy exists
@@ -205,11 +216,11 @@ function seedSampleIndustrialAnalyses() {
   const a1Id = 'ana-cst-001';
   insertMedia.run(
     m1Id,
-    'construction_zone_crane_01.jpg',
-    'Tower Crane Erection Sector 4.jpg',
-    '/uploads/sample_construction.jpg',
-    '/processed/sample_construction_annotated.jpg',
-    'image/jpeg',
+    'construction_zone_crane_01.svg',
+    'Tower Crane Erection Sector 4.svg',
+    '/uploads/sample_construction.svg',
+    '/processed/sample_construction_annotated.svg',
+    'image/svg+xml',
     'image',
     2457600,
     'Apex Construction Site B',
@@ -222,7 +233,6 @@ function seedSampleIndustrialAnalyses() {
   );
 
   // Analysis 1: 3 workers, 1 missing helmet, 1 missing vest -> 2 violations out of 15 checks
-  // Safety score: 100 * (1 - (30 + 25) / (100 * 3 / 100 * 100)) = 81.6% -> 82%
   insertAnalysis.run(
     a1Id,
     m1Id,
@@ -307,7 +317,7 @@ function seedSampleIndustrialAnalyses() {
     'helmet',
     'Critical',
     'Missing safety helmet detected on worker in active crane swing sector',
-    '/processed/sample_construction_annotated.jpg',
+    '/processed/sample_construction_annotated.svg',
     'Active',
     d1
   );
@@ -321,28 +331,28 @@ function seedSampleIndustrialAnalyses() {
     'vest',
     'High',
     'Missing high-visibility safety vest detected in heavy vehicle pathway',
-    '/processed/sample_construction_annotated.jpg',
+    '/processed/sample_construction_annotated.svg',
     'Active',
     d1
   );
 
-  // 2. Media 2: Automobile Assembly Line Robot Cell (Video)
+  // 2. Media 2: Automobile Assembly Line Robot Cell
   const m2Id = 'med-auto-002';
   const a2Id = 'ana-auto-002';
   insertMedia.run(
     m2Id,
-    'auto_assembly_robotic_welding.mp4',
-    'Chassis Welding Line Robotic Cell A.mp4',
-    '/uploads/sample_auto_assembly.mp4',
-    '/processed/sample_auto_assembly_annotated.mp4',
-    'video/mp4',
-    'video',
-    18450000,
+    'auto_assembly_robotic_welding.svg',
+    'Chassis Welding Line Robotic Cell A.svg',
+    '/uploads/sample_auto_assembly.svg',
+    '/processed/sample_auto_annotated.svg',
+    'image/svg+xml',
+    'image',
+    1845000,
     'Detroit Auto Works Plant 3',
     'Automobile Assembly Lines',
     'CELL-WELD-08',
     'Robotic Body Fabrication',
-    'Video surveillance stream batch sample (60 sec)',
+    'Surveillance stream batch sample',
     'completed',
     d2
   );
@@ -375,7 +385,7 @@ function seedSampleIndustrialAnalyses() {
     'gloves',
     'Medium',
     'Operator handling stamped sheet metal without Kevlar cut-resistant gloves',
-    '/processed/sample_auto_annotated.jpg',
+    '/processed/sample_auto_annotated.svg',
     'Acknowledged',
     d2
   );
@@ -385,13 +395,13 @@ function seedSampleIndustrialAnalyses() {
   const a3Id = 'ana-log-003';
   insertMedia.run(
     m3Id,
-    'warehouse_rack_aisle_forklift.jpg',
-    'High-Bay Racking Aisle 12.jpg',
-    '/uploads/sample_warehouse.jpg',
-    '/processed/sample_warehouse_annotated.jpg',
-    'image/jpeg',
+    'warehouse_rack_aisle_forklift.svg',
+    'High-Bay Racking Aisle 12.svg',
+    '/uploads/sample_warehouse.svg',
+    '/processed/sample_warehouse_annotated.svg',
+    'image/svg+xml',
     'image',
-    3120000,
+    312000,
     'Central Distribution Hub 1',
     'Warehouses and Logistics Centers',
     'AISLE-12-HIGHBAY',
@@ -425,13 +435,13 @@ function seedSampleIndustrialAnalyses() {
   const a4Id = 'ana-chem-004';
   insertMedia.run(
     m4Id,
-    'chemical_reactor_manifold_03.jpg',
-    'Catalytic Reaction Manifold Room C.jpg',
-    '/uploads/sample_chemical.jpg',
-    '/processed/sample_chemical_annotated.jpg',
-    'image/jpeg',
+    'chemical_reactor_manifold_03.svg',
+    'Catalytic Reaction Manifold Room C.svg',
+    '/uploads/sample_chemical.svg',
+    '/processed/sample_chemical_annotated.svg',
+    'image/svg+xml',
     'image',
-    2890000,
+    289000,
     'Nova Chemical Synthesis Complex',
     'Industrial Production Units',
     'UNIT-CAT-03',

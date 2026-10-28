@@ -8,6 +8,14 @@ import {
   WorkerTrack,
 } from '../types';
 
+function getAuthHeaders(isJson = true): Record<string, string> {
+  const token = localStorage.getItem('safeguard_token');
+  const headers: Record<string, string> = {};
+  if (isJson) headers['Content-Type'] = 'application/json';
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  return headers;
+}
+
 export const api = {
   // Auth
   async login(email: string, password: string): Promise<{ token: string; user: User }> {
@@ -17,18 +25,31 @@ export const api = {
       body: JSON.stringify({ email, password }),
     });
     if (!res.ok) {
-      const err = await res.json();
+      const err = await res.json().catch(() => ({}));
       throw new Error(err.error || 'Login failed');
     }
-    return res.json();
+    const data = await res.json();
+    if (data.token) {
+      localStorage.setItem('safeguard_token', data.token);
+      localStorage.setItem('safeguard_user', JSON.stringify(data.user));
+    }
+    return data;
   },
 
   async logout(): Promise<void> {
-    await fetch('/api/auth/logout', { method: 'POST' });
+    const token = localStorage.getItem('safeguard_token');
+    await fetch('/api/auth/logout', {
+      method: 'POST',
+      headers: getAuthHeaders(),
+    }).catch(() => {});
+    localStorage.removeItem('safeguard_token');
+    localStorage.removeItem('safeguard_user');
   },
 
   async getCurrentUser(): Promise<User> {
-    const res = await fetch('/api/auth/me');
+    const res = await fetch('/api/auth/me', {
+      headers: getAuthHeaders(),
+    });
     if (!res.ok) throw new Error('Not authenticated');
     return res.json();
   },
@@ -42,7 +63,9 @@ export const api = {
     const q = new URLSearchParams();
     if (params?.site) q.set('site', params.site);
     if (params?.industry) q.set('industry', params.industry);
-    const res = await fetch(`/api/dashboard/summary?${q.toString()}`);
+    const res = await fetch(`/api/dashboard/summary?${q.toString()}`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to load dashboard summary');
     return res.json();
   },
@@ -56,19 +79,26 @@ export const api = {
     const q = new URLSearchParams();
     if (params?.site) q.set('site', params.site);
     if (params?.industry) q.set('industry', params.industry);
-    const res = await fetch(`/api/dashboard/trends?${q.toString()}`);
+    const res = await fetch(`/api/dashboard/trends?${q.toString()}`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to load dashboard trends');
     return res.json();
   },
 
   // Media
   async uploadMedia(formData: FormData): Promise<{ mediaId: string; analysisId: string; analysisResult: any }> {
+    const token = localStorage.getItem('safeguard_token');
+    const headers: Record<string, string> = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
     const res = await fetch('/api/media/upload', {
       method: 'POST',
+      headers,
       body: formData,
     });
     if (!res.ok) {
-      const err = await res.json();
+      const err = await res.json().catch(() => ({}));
       throw new Error(err.error || 'Failed to upload media');
     }
     return res.json();
@@ -81,25 +111,37 @@ export const api = {
     if (params?.site) q.set('site', params.site);
     if (params?.industry) q.set('industry', params.industry);
     if (params?.sort) q.set('sort', params.sort);
-    const res = await fetch(`/api/media?${q.toString()}`);
+    const res = await fetch(`/api/media?${q.toString()}`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch media list');
     return res.json();
   },
 
   async getMediaItem(id: string): Promise<{ media: MediaItem; analysis?: any }> {
-    const res = await fetch(`/api/media/${id}`);
+    const res = await fetch(`/api/media/${id}`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch media details');
     return res.json();
   },
 
   async deleteMedia(id: string): Promise<void> {
-    const res = await fetch(`/api/media/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Failed to delete media');
+    const res = await fetch(`/api/media/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to delete media');
+    }
   },
 
   // Analyses
   async getAnalysisReport(id: string): Promise<AnalysisReport> {
-    const res = await fetch(`/api/analyses/${id}/report`);
+    const res = await fetch(`/api/analyses/${id}/report`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch analysis report');
     return res.json();
   },
@@ -107,10 +149,13 @@ export const api = {
   async reanalyzeMedia(mediaId: string, options?: { confidenceThreshold?: number; requiredPPE?: string[]; samplingRate?: number }): Promise<any> {
     const res = await fetch(`/api/analyses/${mediaId}/start`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(options || {}),
     });
-    if (!res.ok) throw new Error('Failed to trigger re-analysis');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to trigger re-analysis');
+    }
     return res.json();
   },
 
@@ -121,7 +166,9 @@ export const api = {
     if (params?.severity) q.set('severity', params.severity);
     if (params?.ppe) q.set('ppe', params.ppe);
     if (params?.site) q.set('site', params.site);
-    const res = await fetch(`/api/alerts?${q.toString()}`);
+    const res = await fetch(`/api/alerts?${q.toString()}`, {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch alerts');
     return res.json();
   },
@@ -129,22 +176,29 @@ export const api = {
   async updateAlert(id: string, updates: { status: string; notes?: string }): Promise<void> {
     const res = await fetch(`/api/alerts/${id}`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(updates),
     });
-    if (!res.ok) throw new Error('Failed to update alert');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to update alert');
+    }
   },
 
   // Worker tracks
   async getWorkerTracks(): Promise<WorkerTrack[]> {
-    const res = await fetch('/api/tracks');
+    const res = await fetch('/api/tracks', {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch worker tracks');
     return res.json();
   },
 
   // Safety Policy
   async getSafetyPolicy(): Promise<{ id: string; version: string; industryType: string; config: SafetyPolicyConfig; updatedAt: string }> {
-    const res = await fetch('/api/settings/ppe-policy');
+    const res = await fetch('/api/settings/ppe-policy', {
+      headers: getAuthHeaders(false),
+    });
     if (!res.ok) throw new Error('Failed to fetch safety policy');
     return res.json();
   },
@@ -152,25 +206,36 @@ export const api = {
   async updateSafetyPolicy(data: { version: string; industryType: string; config: SafetyPolicyConfig }): Promise<void> {
     const res = await fetch('/api/settings/ppe-policy', {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('Failed to update policy');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to update policy');
+    }
   },
 
-  // Users
+  // Users (Admin only)
   async getUsers(): Promise<User[]> {
-    const res = await fetch('/api/users');
-    if (!res.ok) throw new Error('Failed to fetch users');
+    const res = await fetch('/api/users', {
+      headers: getAuthHeaders(),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to fetch users');
+    }
     return res.json();
   },
 
   async createUser(data: { email: string; name: string; role: string; password: string }): Promise<void> {
     const res = await fetch('/api/users', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error('Failed to create user');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to create user');
+    }
   },
 };

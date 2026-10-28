@@ -70,3 +70,29 @@ def get_summary():
         },
         'recentAlerts': recent_alerts_data
     })
+
+@api_bp.route('/detect', methods=['POST'])
+def detect_ppe():
+    data = request.get_json() or {}
+    media_path = data.get('media_path')
+    conf_threshold = float(data.get('conf_threshold', 0.50))
+    required_ppe = data.get('required_ppe', ['helmet', 'vest', 'gloves', 'safety_shoes', 'goggles'])
+
+    if not media_path or not os.path.exists(media_path):
+        return jsonify({'error': 'Valid media_path is required'}), 400
+
+    try:
+        workers = yolo_service.run_inference_image(
+            image_path=media_path,
+            conf_threshold=conf_threshold,
+            required_ppe=required_ppe
+        )
+        return jsonify({
+            'success': True,
+            'workers': workers,
+            'model_loaded': yolo_service.model_loaded,
+            'model_name': 'YOLOv8x-PPE' if yolo_service.model_loaded else 'YOLOv8-Fallback'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
