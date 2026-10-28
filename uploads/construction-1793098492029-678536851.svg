@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+    <defs>
+      <linearGradient id="cSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#38bdf8"/>
+        <stop offset="60%" stop-color="#bae6fd"/>
+        <stop offset="100%" stop-color="#e0f2fe"/>
+      </linearGradient>
+      <linearGradient id="cDeck" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#64748b"/>
+        <stop offset="100%" stop-color="#334155"/>
+      </linearGradient>
+    </defs>
+    
+    <!-- Background: Blue Daylight Construction Site -->
+    <rect width="1280" height="420" fill="url(#cSky)" />
+    
+    <!-- Concrete Foundation & Steel Rebar Deck -->
+    <rect y="420" width="1280" height="300" fill="url(#cDeck)" />
+    <line x1="0" y1="420" x2="1280" y2="420" stroke="#f59e0b" stroke-width="8" stroke-dasharray="30,20" />
+    
+    <!-- Tower Crane Structure in Background -->
+    <g opacity="0.45" stroke="#0284c7" stroke-width="3" fill="none">
+      <rect x="120" y="40" width="50" height="400" />
+      <line x1="120" y1="40" x2="170" y2="90" /><line x1="120" y1="90" x2="170" y2="140" />
+      <line x1="120" y1="140" x2="170" y2="190" /><line x1="120" y1="190" x2="170" y2="240" />
+      <line x1="120" y1="40" x2="700" y2="40" stroke-width="5" />
+      <line x1="450" y1="40" x2="450" y2="280" stroke="#f59e0b" stroke-width="2" />
+      <rect x="430" y="280" width="40" height="40" fill="#f59e0b" />
+    </g>
+
+    <!-- Structural Steel Beams & Scaffolding -->
+    <g stroke="#475569" stroke-width="8" opacity="0.6">
+      <line x1="40" y1="150" x2="1240" y2="150" />
+      <line x1="80" y1="150" x2="80" y2="420" />
+      <line x1="460" y1="150" x2="460" y2="420" />
+      <line x1="840" y1="150" x2="840" y2="420" />
+      <line x1="1200" y1="150" x2="1200" y2="420" />
+    </g>
+
+    <!-- Worker 1 Silhouette (Missing Helmet, Wearing High-Vis Vest) -->
+    <g id="worker-figure-1">
+      <!-- Head (Dark Hair, No Helmet) -->
+      <circle cx="310" cy="275" r="32" fill="#3b2b23" />
+      <!-- Torso with Neon Green/Yellow Vest -->
+      <path d="M260,330 L360,330 L350,510 L270,510 Z" fill="#84cc16" stroke="#4d7c0f" stroke-width="2" />
+      <!-- Reflective Silver Stripes on Vest -->
+      <rect x="270" y="380" width="80" height="14" fill="#f1f5f9" />
+      <rect x="270" y="440" width="80" height="14" fill="#f1f5f9" />
+      <!-- Legs with Jeans -->
+      <rect x="275" y="510" width="30" height="130" fill="#1e3a8a" />
+      <rect x="315" y="510" width="30" height="130" fill="#1e3a8a" />
+      <!-- Steel Boots -->
+      <rect x="265" y="630" width="45" height="25" fill="#78350f" rx="4" />
+      <rect x="315" y="630" width="45" height="25" fill="#78350f" rx="4" />
+    </g>
+
+    <!-- Worker 2 Silhouette (Wearing Hardhat, Missing Safety Vest) -->
+    <g id="worker-figure-2">
+      <!-- Yellow Hardhat -->
+      <path d="M590,240 C590,215 670,215 670,240 Z" fill="#eab308" stroke="#ca8a04" stroke-width="3" />
+      <rect x="585" y="238" width="90" height="10" fill="#ca8a04" rx="3" />
+      <circle cx="630" cy="265" r="24" fill="#f5d0b5" />
+      <!-- Plain Navy Blue Shirt (NO VEST - VIOLATION) -->
+      <path d="M580,300 L680,300 L670,490 L590,490 Z" fill="#1e293b" />
+      <!-- Work Pants -->
+      <rect x="595" y="490" width="32" height="145" fill="#334155" />
+      <rect x="635" y="490" width="32" height="145" fill="#334155" />
+      <!-- Safety Boots -->
+      <rect x="585" y="625" width="45" height="25" fill="#451a03" rx="4" />
+      <rect x="635" y="625" width="45" height="25" fill="#451a03" rx="4" />
+    </g>
+
+    <!-- Worker 3 Silhouette (Fully Compliant: White Hardhat + Orange Safety Vest) -->
+    <g id="worker-figure-3">
+      <!-- White Hardhat -->
+      <path d="M930,250 C930,225 1010,225 1010,250 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="3" />
+      <rect x="925" y="248" width="90" height="10" fill="#e2e8f0" rx="3" />
+      <circle cx="970" cy="275" r="24" fill="#d97706" />
+      <!-- Fluorescent Orange Vest -->
+      <path d="M920,310 L1020,310 L1010,500 L930,500 Z" fill="#f97316" stroke="#ea580c" stroke-width="2" />
+      <!-- Silver Reflective Tape -->
+      <line x1="935" y1="310" x2="960" y2="500" stroke="#ffffff" stroke-width="12" />
+      <line x1="1005" y1="310" x2="980" y2="500" stroke="#ffffff" stroke-width="12" />
+      <!-- Work Cargo Pants -->
+      <rect x="935" y="500" width="30" height="135" fill="#374151" />
+      <rect x="975" y="500" width="30" height="135" fill="#374151" />
+      <!-- Steel Boots -->
+      <rect x="925" y="625" width="45" height="25" fill="#292524" rx="4" />
+      <rect x="975" y="625" width="45" height="25" fill="#292524" rx="4" />
+    </g>
+
+    <!-- Watermark / Site Overlay Banner -->
+    <rect x="20" y="20" width="440" height="36" fill="rgba(15, 23, 42, 0.85)" rx="6" />
+    <circle cx="38" cy="38" r="5" fill="#10b981" />
+    <text x="52" y="42" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">
+      APEX CONSTRUCTION SECTOR 4B · HIGH-RES CAMERA FEED
+    </text>
+
+    
+  </svg>

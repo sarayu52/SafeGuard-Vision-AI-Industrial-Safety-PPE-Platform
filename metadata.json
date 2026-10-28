@@ -1,0 +1,6 @@
+{
+  "name": "SafeGuard Vision — AI Industrial Safety & PPE Platform",
+  "description": "AI-Powered Industrial Workplace Safety Monitoring, PPE Detection, Worker Tracking & Power BI-Style Business Intelligence Platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

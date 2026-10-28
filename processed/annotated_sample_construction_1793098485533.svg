@@ -1,0 +1,57 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <defs>
+        <linearGradient id="hudGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.90" />
+          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.90" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Real Original Image Background Layer: Ensures image is NEVER blacked out! -->
+      <image href="/uploads/sample_construction.jpg" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+
+      <!-- Top HUD Watermark -->
+      <rect x="16" y="16" width="410" height="42" fill="url(#hudGrad)" rx="6" stroke="#334155" stroke-width="1" />
+      <circle cx="34" cy="37" r="6" fill="#10b981" />
+      <text x="50" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">
+        SAFEGUARD AI · YOLOv8 PPE ANALYZER
+      </text>
+      <text x="50" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">
+        Site: Apex Construction · Real-time Spatial Association
+      </text>
+
+      
+      <!-- Worker Container Track 01 -->
+      <g id="worker-0" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="43" y="151" width="202" height="417"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#ef4444" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill -->
+        <rect x="43" y="123" width="210" height="26"
+              fill="rgba(239, 68, 68, 0.92)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="51" y="140" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #1 [Track 01] · Violation detected
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="79.36" y="149" width="129.28" height="91.74"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="83.36" y="163" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: OK
+        </text>
+
+        <!-- Torso / Vest Region -->
+        <rect x="67.24" y="242.74" width="153.52" height="175.14"
+              fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="71.24" y="258.74" fill="#ef4444" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: MISSING
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="59.16" y="492.94" width="169.68" height="75.06"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+      </g>
+    
+    </svg>
+  

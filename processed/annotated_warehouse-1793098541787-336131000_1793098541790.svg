@@ -1,0 +1,156 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <defs>
+        <linearGradient id="hudGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0f172a" stop-opacity="0.90" />
+          <stop offset="100%" stop-color="#1e293b" stop-opacity="0.90" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Real Original Image Background Layer: Ensures image is NEVER blacked out! -->
+      <image href="/app/applet/uploads/warehouse-1793098541787-336131000.svg" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+
+      <!-- Top HUD Watermark -->
+      <rect x="16" y="16" width="410" height="42" fill="url(#hudGrad)" rx="6" stroke="#334155" stroke-width="1" />
+      <circle cx="34" cy="37" r="6" fill="#10b981" />
+      <text x="50" y="34" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="12" font-weight="600">
+        SAFEGUARD AI · YOLOv8 PPE ANALYZER
+      </text>
+      <text x="50" y="48" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">
+        Site: Central Distribution Hub · Real-time Spatial Association
+      </text>
+
+      
+      <!-- Worker Container Track 01 -->
+      <g id="worker-0" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="40" y="226" width="177" height="452"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#10b981" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill -->
+        <rect x="40" y="198" width="210" height="26"
+              fill="rgba(16, 185, 129, 0.92)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="48" y="215" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #1 [Track 01] · Compliant
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="71.86" y="224" width="113.28" height="99.44"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="75.86" y="238" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: OK
+        </text>
+
+        <!-- Torso / Vest Region -->
+        <rect x="61.239999999999995" y="325.44" width="134.52" height="189.84"
+              fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="65.24" y="341.44" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: UNVERIFIED
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="54.16" y="596.64" width="148.68" height="81.36"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+      </g>
+    
+
+      <!-- Worker Container Track 02 -->
+      <g id="worker-1" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="326" y="190" width="213" height="440"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#ef4444" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill -->
+        <rect x="326" y="162" width="213" height="26"
+              fill="rgba(239, 68, 68, 0.92)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="334" y="179" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #2 [Track 02] · Violation detected
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="364.34" y="188" width="136.32" height="96.8"
+              fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="368.34" y="202" fill="#ef4444" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: MISSING
+        </text>
+
+        <!-- Torso / Vest Region -->
+        <rect x="351.56" y="286.8" width="161.88" height="184.79999999999998"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="355.56" y="302.8" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: OK
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="343.04" y="550.8" width="178.92" height="79.2"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+      </g>
+    
+
+      <!-- Worker Container Track 03 -->
+      <g id="worker-2" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="576" y="228" width="170" height="416"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#10b981" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill -->
+        <rect x="576" y="200" width="210" height="26"
+              fill="rgba(16, 185, 129, 0.92)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="584" y="217" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #3 [Track 03] · Compliant
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="606.6" y="226" width="108.8" height="91.52"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="610.6" y="240" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: OK
+        </text>
+
+        <!-- Torso / Vest Region -->
+        <rect x="596.4" y="319.52" width="129.2" height="174.72"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="600.4" y="335.52" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: OK
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="589.6" y="569.12" width="142.79999999999998" height="74.88"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+      </g>
+    
+
+      <!-- Worker Container Track 04 -->
+      <g id="worker-3" class="worker-bbox">
+        <!-- Main Person Bounding Box -->
+        <rect x="821" y="195" width="199" height="425"
+              fill="rgba(15, 23, 42, 0.08)" stroke="#10b981" stroke-width="3" rx="4" />
+        
+        <!-- Header Pill -->
+        <rect x="821" y="167" width="210" height="26"
+              fill="rgba(16, 185, 129, 0.92)" rx="4" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.3))" />
+        <text x="829" y="184" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">
+          Worker #4 [Track 04] · Compliant
+        </text>
+
+        <!-- Head / Helmet Region -->
+        <rect x="856.82" y="193" width="127.36" height="93.5"
+              fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="860.82" y="207" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Helmet: UNVERIFIED
+        </text>
+
+        <!-- Torso / Vest Region -->
+        <rect x="844.88" y="288.5" width="151.24" height="178.5"
+              fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="4,2" rx="2" />
+        <text x="848.88" y="304.5" fill="#10b981" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">
+          Vest: OK
+        </text>
+
+        <!-- Feet / Shoes Region -->
+        <rect x="836.92" y="543.5" width="167.16" height="76.5"
+              fill="none" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" rx="2" />
+      </g>
+    
+    </svg>
+  

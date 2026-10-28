@@ -1,0 +1,743 @@
+# PROJECT: AI-Powered Industrial Safety Monitoring, PPE Detection & Business Intelligence Platform
+
+Act as a senior full-stack software engineer, computer vision engineer, UI/UX designer, database architect, and AI engineer. Build a complete, functional, responsive web application for industrial workplace safety monitoring using YOLOv8, Python, Flask, OpenCV, a database, and interactive Power BI-style analytics dashboards.
+
+Do not create only a landing page, UI mockup, or static prototype. Build a working end-to-end application with a functional backend, real file uploads, database persistence, actual AI inference integration, and dynamically generated reports.
+
+## 1. PROJECT OBJECTIVE
+
+Develop an AI-powered safety monitoring platform that allows an authorized industry manager or administrator to upload workplace images and videos from:
+
+- Construction sites
+- Automobile manufacturing factories
+- Automobile assembly lines
+- Industrial production units
+- Warehouses and logistics centers
+- Other field-work environments
+
+The system must analyze uploaded media to identify workers, check the presence or absence of required Personal Protective Equipment (PPE), identify possible safety violations, calculate transparent safety and risk scores, generate immediate in-application alerts, and display interactive analytical dashboards.
+
+Examples:
+- A worker wearing a safety helmet, reflective safety vest, gloves, and safety shoes should be evaluated against the configured safety policy.
+- A worker without a helmet should generate a missing-helmet alert if the model can reliably identify that condition.
+- A worker without a reflective safety vest should generate a missing-vest alert.
+- Missing gloves should be flagged when glove detection is supported by the configured model and image quality.
+- Different workers in the same image must be evaluated individually whenever the model can reliably distinguish them.
+- Different images and videos must produce different reports based on their actual detection results.
+
+Never report a PPE violation as confirmed when the model has not actually detected enough evidence. Provide an “Unknown / Unable to verify” state when visibility, occlusion, or model limitations prevent a reliable decision.
+
+## 2. REQUIRED TECHNOLOGY STACK
+
+Use the following architecture:
+
+Frontend:
+- React with TypeScript
+- Vite
+- Tailwind CSS
+- Recharts or another suitable interactive charting library
+- Lucide icons
+- Responsive layouts for desktop, laptop, tablet, and mobile
+- Accessible forms, buttons, navigation, tables, and status indicators
+
+Backend:
+- Python 3.11
+- Flask REST API
+- Flask-CORS configured securely
+- Ultralytics YOLOv8 for object detection
+- OpenCV for image and video processing
+- SQLAlchemy ORM
+- SQLite for local development, with an architecture that can migrate to PostgreSQL
+- Werkzeug password hashing or an equivalent secure password-hashing library
+- Environment variables for secrets and configuration
+
+AI and computer vision:
+- A compatible, PPE-trained YOLOv8 model
+- OpenCV for extracting video frames
+- Person detection and PPE association
+- Configurable detection confidence and non-maximum suppression
+- Detection results with bounding boxes, class labels, confidence values, timestamps, and worker/track identifiers when available
+
+Reporting:
+- Dynamic, interactive Power BI-style dashboards inside the website
+- Chart.js or Recharts for charts
+- CSV export for reports
+- PDF export for individual analysis reports and daily summaries
+- A report structure that can later be connected to Microsoft Power BI through its supported integration options
+
+IMPORTANT: A Power BI-style dashboard is the required initial deliverable. Do not falsely claim that Microsoft Power BI itself is connected. Keep the application architecture ready for a future genuine Power BI integration.
+
+## 3. COMPLETE APPLICATION NAVIGATION
+
+Create a professional left sidebar with collapsible navigation and a responsive mobile menu.
+
+Required pages:
+
+1. Admin Login
+2. Main Dashboard
+3. Upload and Analyze Media
+4. Individual Analysis Report
+5. Alerts and Safety Violations
+6. Media Gallery and Database
+7. Daily and Historical Analytics
+8. Worker/Track Analysis
+9. Industry and Safety Policy Settings
+10. User and Admin Management
+11. Profile and Logout
+
+Every page must have working navigation. Highlight the active navigation item, show breadcrumbs where useful, preserve filters when appropriate, and include loading states, empty states, error states, and success notifications.
+
+Do not leave any navigation item or button non-functional.
+
+## 4. ADMIN LOGIN AND SECURITY
+
+The first screen must be an admin login page.
+
+Requirements:
+- Email or username and password fields
+- Show/hide password control
+- Input validation
+- Secure password hashing
+- Backend authentication
+- Session-based authentication or secure JWT authentication
+- Protected API endpoints
+- Logout functionality
+- Role-based access for administrators and managers
+- Changeable credentials through environment variables or an admin setup command
+- No hardcoded production passwords
+- No public access to private uploaded media
+- Restrict file types and file sizes
+- Secure file names and storage paths
+- Prevent unauthorized access to other users' reports
+- Validate all uploaded files on the backend
+
+For local development, provide a documented way to create the first admin account. Never expose passwords, API secrets, or sensitive environment values in frontend code.
+
+## 5. MAIN DASHBOARD
+
+Design a premium industrial analytics dashboard with a dark navy sidebar, clean white or light-gray cards, blue/teal accents, red violation indicators, and green compliant indicators.
+
+Display live database-derived KPI cards:
+
+- Total images analyzed
+- Total videos analyzed
+- Total workers or person detections
+- Total PPE detections
+- Confirmed safety violations
+- Uncertain/unverified PPE checks
+- Overall safety score
+- Overall risk score
+- High-risk incidents
+- Analyses completed today
+
+Create interactive charts:
+- Safety score over time
+- Risk score over time
+- Daily uploads
+- PPE violation distribution
+- Helmet compliance
+- Reflective vest compliance
+- Glove compliance
+- Safety shoe compliance, when supported
+- Violations by industry/site
+- Risk level distribution
+- Hourly or daily incident trends
+
+Include:
+- Recent analyses
+- Recent critical alerts
+- Highest-risk uploads
+- Site or industry filters
+- Date range filter
+- Search
+- Quick upload button
+- View all reports button
+
+Every KPI and chart must use actual stored analysis data. Recalculate results when filters change. Do not use hardcoded sample numbers in the production dashboard.
+
+When no records exist, show a helpful empty state and guide the admin to upload the first image or video.
+
+## 6. UPLOAD AND ANALYZE MEDIA PAGE
+
+Build a complete, responsive media upload page.
+
+Supported image types:
+- JPG
+- JPEG
+- PNG
+- WEBP
+- BMP
+
+Supported video types:
+- MP4
+- AVI
+- MOV
+- MKV
+- WEBM, if supported by the installed codecs
+
+Required controls:
+- Drag-and-drop upload
+- Browse files button
+- File type and size validation
+- Image/video preview before analysis
+- Upload progress
+- Processing progress
+- Cancel option when safely supported
+- Retry on failure
+- Remove selected file
+- Upload and Analyze button
+- Clear success/error messages
+
+Before analysis, allow the manager to specify:
+- Industry type
+- Site/factory name
+- Location or site code
+- Date/time metadata if necessary
+- Required PPE policy
+- Detection confidence threshold
+- Optional shift or department
+- Optional notes
+
+After upload, save the original media to persistent storage and create a database record. Never overwrite another upload with the same filename.
+
+When the admin clicks Analyze:
+1. Validate the upload on the backend.
+2. Save the original media securely.
+3. Create a unique analysis ID.
+4. Run the configured YOLOv8 model.
+5. For videos, extract frames at a configurable sampling rate.
+6. Run inference on sampled frames or supported frame sequences.
+7. Associate PPE detections with individual person detections where reliable.
+8. Track workers across video frames when supported by the model and tracking algorithm.
+9. Aggregate repeated observations without counting the same continuous violation as a new incident on every frame.
+10. Save detections, confidence scores, timestamps, and violation records.
+11. Generate annotated output images or video.
+12. Calculate individual and overall scores.
+13. Save the report and analytics data in the database.
+14. Display the completed report for that specific upload.
+
+Use a background job mechanism such as Celery with Redis, or a documented lightweight background-processing implementation appropriate for local development, so long videos do not block the web server.
+
+Show real processing progress when available. Do not fake progress percentages.
+
+## 7. YOLOV8 PPE DETECTION ENGINE
+
+Use Ultralytics YOLOv8 in the Python backend.
+
+Implement a modular detection service with functions for:
+- Loading the configured model
+- Validating model availability
+- Detecting persons
+- Detecting supported PPE classes
+- Returning bounding boxes and confidence scores
+- Associating PPE with workers
+- Processing image uploads
+- Processing video frames
+- Saving annotated output
+- Aggregating video observations
+- Creating structured detection results
+
+Support configurable classes such as:
+- person
+- helmet / hardhat
+- safety vest / reflective vest
+- gloves
+- safety shoes / boots
+- goggles
+- mask
+- missing helmet, if explicitly supported by the model
+- missing vest, if explicitly supported by the model
+- other classes supported by the configured dataset
+
+IMPORTANT MODEL REQUIREMENTS:
+
+A standard COCO-pretrained YOLOv8 model is not a PPE-compliance model. Do not claim that it can reliably detect missing helmets, reflective vests, or gloves.
+
+Provide a configuration variable such as PPE_MODEL_PATH pointing to the actual trained weights.
+
+Allow a model file such as models/best.pt to be configured.
+
+Document the expected model class names and model training requirements.
+
+If no PPE-trained model is installed:
+- Show a clear warning in the UI.
+- Allow a demo mode for general object detection if useful.
+- Do not produce fabricated PPE compliance scores.
+- Do not treat an undetected helmet as proof that a worker has no helmet.
+- Display PPE results as “Unavailable” or “Unable to verify” when appropriate.
+- Never generate fake violation records just to populate the dashboard.
+
+Use a pluggable detection adapter so that a compatible trained PPE model can be replaced without rewriting the whole application.
+
+For video analysis, save the frame timestamp for each relevant detection and use a stable track identifier when tracking is available. Explain that a track ID is a temporary visual tracking identifier, not a verified real-world identity.
+
+## 8. PERSON-WISE PPE ANALYSIS
+
+The system must try to analyze each distinct visible worker separately.
+
+For every detected person or track, store:
+
+- Analysis ID
+- Person detection ID
+- Video track ID, when available
+- Frame number
+- Timestamp
+- Person bounding box
+- PPE item
+- Detection confidence
+- Compliance status
+- Violation type
+- Risk severity
+- Evidence image reference
+
+Possible compliance statuses:
+- Compliant
+- Violation detected
+- Unable to verify
+- Not supported by model
+
+Associate PPE with a person using a documented spatial association method or a trained model that directly detects PPE violations. Do not assume that any helmet in an image belongs to every worker in that image.
+
+Show the annotated media with separate bounding boxes and readable labels. Make labels visually distinguishable:
+- Green for supported compliant detections
+- Red for confirmed violation detections
+- Amber for uncertain detections
+- Gray for unsupported checks
+
+Do not assign a worker's real name or identity from visual appearance. Use anonymous person/track identifiers.
+
+## 9. SAFETY SCORE AND RISK SCORE
+
+Calculate scores from actual evidence and a configurable safety policy.
+
+Implement a transparent weighted safety score, for example:
+
+Safety Score = 100 × (1 − weighted confirmed violations / total applicable weighted checks)
+
+Clamp the score between 0 and 100. Define how the denominator is calculated, exclude unsupported checks, and document the handling of uncertain checks.
+
+Example configurable violation weights:
+- Missing helmet: 30
+- Missing reflective vest: 25
+- Missing gloves: 15
+- Missing safety shoes: 20
+- Other configured violations: configurable
+
+These are initial example weights only. Make them editable by an authorized administrator and label them as a configurable policy rather than universal safety standards.
+
+Define risk score using configurable severity weights, confirmed evidence, and incident aggregation. Provide a clear calculation and avoid double-counting repeated video frames.
+
+Example risk categories:
+- Low
+- Medium
+- High
+- Critical
+
+Provide the following per-upload outputs:
+- Overall safety score
+- Overall risk score
+- Confirmed violation count
+- Unverified checks count
+- Number of persons detected
+- PPE compliance breakdown
+- Highest risk severity
+- Model confidence summary
+- Analysis duration
+- Evidence references
+
+If the image or video is too unclear, the model is missing, or required PPE classes are unsupported, mark the score as unavailable or provisional. Do not present an unreliable score as a definitive safety measurement.
+
+## 10. IMMEDIATE SAFETY ALERTS
+
+Create a dedicated alerts page and an alert panel on the dashboard.
+
+When a supported PPE violation is confirmed:
+- Create an alert record.
+- Include site name, upload ID, person/track ID, PPE item, severity, timestamp, and evidence.
+- Show a clear red warning for critical or high-risk incidents.
+- Display a notification badge in the sidebar.
+- Allow authorized admins to acknowledge and resolve alerts.
+- Store alert status and action history.
+- Filter by date, severity, site, and PPE type.
+
+Possible messages:
+- “Helmet violation detected — Track 04”
+- “Reflective vest violation detected — Track 02”
+- “Gloves status could not be verified”
+- “High-risk event recorded at Assembly Line A”
+
+The system analyzes uploaded media, so describe alerts as detection-time alerts, not real-time CCTV monitoring. True live camera monitoring is a future extension unless a live stream source is implemented.
+
+Do not imply that an alert has been sent by SMS, email, WhatsApp, or a physical alarm unless that integration is actually configured and working.
+
+## 11. INDIVIDUAL IMAGE REPORT DASHBOARD
+
+Every uploaded image must have its own unique analysis report page.
+
+The report must show:
+- Original image
+- Annotated image
+- Unique analysis ID
+- Upload timestamp
+- Site and industry
+- Total persons detected
+- PPE compliance summary
+- Confirmed violation count
+- Unverified checks
+- Safety score
+- Risk score
+- Risk classification
+- Confidence distribution
+- Violation details
+- Person-wise results when supported
+- Evidence bounding boxes
+- Model and policy version
+- Analysis processing status
+
+Include interactive charts:
+- PPE compliance distribution
+- Violation category breakdown
+- Person-wise status
+- Risk contribution by violation type
+
+Add working buttons:
+- Download annotated image
+- Export report as PDF
+- Export data as CSV
+- Reanalyze
+- Return to gallery
+- Return to dashboard
+
+Each report must load from its own database analysis ID. Never reuse the previous image's results.
+
+## 12. INDIVIDUAL VIDEO REPORT DASHBOARD
+
+Every video must have its own distinct report.
+
+Display:
+- Original video playback
+- Processed/annotated video playback when encoding succeeds
+- Total frames sampled
+- Total persons detected, with an explanation of unique tracks versus detections
+- Confirmed incidents
+- Repeated observations grouped into incidents
+- Incident timestamps
+- Violation duration when it can be estimated
+- Safety score
+- Risk score
+- PPE compliance distribution
+- Timeline of violations
+- Track-wise summary
+- Confidence summary
+- Unverified checks
+- Processing duration
+
+Add a timeline chart where clicking an incident jumps to the corresponding video time when the player supports it.
+
+Show evidence frames for each violation.
+
+Provide downloadable video output and report files only when generation succeeds. Handle video codec errors gracefully.
+
+Do not count every frame of the same continuous violation as a separate incident.
+
+## 13. DAILY AND HISTORICAL ANALYTICS DASHBOARD
+
+Create a dedicated analytics page aggregating all analyses from the database.
+
+Provide filters for:
+- Start and end date
+- Industry
+- Site/factory
+- Department or shift
+- PPE type
+- Risk severity
+- Analysis type: image/video
+
+Show:
+- Total uploads
+- Total processed images and videos
+- Total distinct analyses
+- Total detected persons and distinct video tracks where applicable
+- Confirmed violation incidents
+- Unverified checks
+- Daily average safety score
+- Daily average risk score
+- PPE-specific compliance trends
+- Top violation categories
+- Sites with the highest incident counts
+- Risk trends
+- Time-of-day trends
+- Historical comparisons
+
+Include a daily summary report for every date with records.
+
+The daily report should contain:
+- Upload count
+- Processed/failed analysis count
+- Overall safety score and the exact aggregation method
+- Overall risk score and the exact aggregation method
+- Confirmed incident count
+- PPE category breakdown
+- Site-wise comparison
+- High-risk incidents
+- Links to the original individual reports
+
+Only aggregate records within the selected filters. Clearly distinguish analysis count, person count, detection count, and incident count.
+
+Create a “Generate Daily Report” button that works and produces a downloadable PDF and CSV based on the selected date.
+
+Never use randomly generated chart values or placeholder records in real reports.
+
+## 14. MEDIA GALLERY AND DATABASE
+
+Create a separate Media Gallery page where uploaded images and videos are stored and visible.
+
+Use a responsive grid of media cards with thumbnails.
+
+Each card must show:
+- Thumbnail or preview
+- Original filename
+- Upload date and time
+- Industry/site
+- Image or video type
+- Analysis status
+- Safety score, if available
+- Risk score, if available
+- Confirmed violation count
+- Processing status
+- View report button
+
+Add:
+- Search by filename
+- Date filters
+- Site filters
+- Industry filters
+- Image/video filter
+- Risk filter
+- Pagination
+- Sort by newest, oldest, highest risk, and lowest safety score
+- Multi-select where appropriate
+- Delete with confirmation and authorization
+
+Clicking a card must open the correct media record and its individual analysis report.
+
+Store original files and generated outputs in persistent storage. Save their references and metadata in the database. Do not store large binary video files directly inside SQLite unless specifically justified.
+
+Use a configurable upload directory and document how to migrate to cloud object storage later.
+
+Database tables should include appropriate relationships for:
+- Admin users
+- Sites and industry settings
+- Media uploads
+- Analysis jobs
+- Person detections/tracks
+- PPE detections
+- Safety incidents
+- Alerts
+- Safety policies
+- Daily report metadata
+- Audit logs
+
+Use migrations or a documented database initialization method.
+
+When deleting a media record, handle dependent reports, alert evidence, and stored files safely. Require confirmation and authorization.
+
+## 15. SAFETY POLICY SETTINGS
+
+Create a settings page where authorized administrators can configure:
+- Industry type
+- Site information
+- Required PPE categories
+- PPE violation weights
+- Risk severity thresholds
+- Model confidence threshold
+- Video frame sampling rate
+- Maximum upload size
+- Supported model path
+- Policy version and effective date
+
+Keep a record of the policy version used for each analysis so historical reports remain interpretable.
+
+Do not silently change previous reports when an administrator edits the current policy.
+
+## 16. USER INTERFACE AND DESIGN
+
+Use a premium industrial enterprise design.
+
+Design direction:
+- Dark navy sidebar
+- White or light-gray content background
+- Blue/teal primary actions
+- Green compliant status
+- Red confirmed violations
+- Amber uncertainty/warnings
+- Consistent cards, tables, chart styles, spacing, and typography
+- Modern sans-serif typography
+- Subtle transitions and hover effects
+- Accessible contrast
+- Responsive layouts
+- Clear visual hierarchy
+
+The dashboard should look like a professional enterprise analytics application, not a basic student CRUD application.
+
+Create:
+- Reusable cards and chart components
+- Reusable status badges
+- Loading skeletons
+- Toast notifications
+- Confirmation dialogs
+- Form validation messages
+- Helpful empty states
+- Error boundaries
+- Responsive navigation
+- Pagination and filter controls
+
+All buttons and forms must work. Use real API calls and actual database values.
+
+Do not create non-functional demo buttons or decorative upload controls.
+
+## 17. API DESIGN
+
+Create organized Flask REST endpoints, including appropriate authentication and authorization:
+
+- POST /api/auth/login
+- POST /api/auth/logout
+- GET /api/auth/me
+- GET /api/dashboard/summary
+- GET /api/dashboard/trends
+- POST /api/media/upload
+- GET /api/media
+- GET /api/media/:id
+- DELETE /api/media/:id
+- POST /api/analyses/:id/start
+- GET /api/analyses/:id
+- GET /api/analyses/:id/report
+- GET /api/analyses/:id/evidence
+- GET /api/alerts
+- PATCH /api/alerts/:id
+- GET /api/analytics/daily
+- GET /api/analytics/trends
+- GET /api/reports/daily
+- GET /api/reports/:id/export
+- GET /api/settings/ppe-policy
+- PUT /api/settings/ppe-policy
+
+You may adapt endpoint names if the final implementation is internally consistent. Implement proper HTTP status codes, request validation, pagination, authentication, and clear error responses.
+
+## 18. PROJECT STRUCTURE
+
+Organize the project cleanly, for example:
+
+industrial-safety-platform/
+  frontend/
+    src/
+      components/
+      layouts/
+      pages/
+      services/
+      hooks/
+      types/
+      utils/
+    package.json
+    vite.config.ts
+  backend/
+    app/
+      routes/
+      models/
+      services/
+      detection/
+      analytics/
+      reports/
+      auth/
+    models/
+      best.pt (provided separately by the user)
+    uploads/
+    processed/
+    instance/
+    tests/
+    requirements.txt
+    .env.example
+    run.py
+  README.md
+
+Do not put all application logic in one giant file. Use modular, readable code and meaningful function names.
+
+Do not generate an empty best.pt placeholder. Document how to obtain and configure a compatible trained model.
+
+## 19. TESTING AND RELIABILITY
+
+Include tests or a clear verification checklist for:
+- Admin login and logout
+- Protected routes
+- Invalid credentials
+- File upload validation
+- Image analysis
+- Video analysis
+- Model unavailable state
+- Unsupported PPE class state
+- Database persistence after server restart
+- Unique results for different media
+- Individual report loading
+- Dashboard filters
+- Daily aggregation
+- CSV and PDF exports
+- Alert creation and acknowledgement
+- File deletion and access control
+- Failed video encoding
+- Missing or unreadable media
+- Empty database state
+
+Make sure uploading a second image does not display the first image's results.
+
+Use a unique media ID and analysis ID for each upload. Do not use a global shared variable for the latest analysis result.
+
+Never crash the entire website when a model fails to load or one upload cannot be processed. Save an appropriate failed status and display an actionable message.
+
+## 20. DELIVERABLES AND EXECUTION INSTRUCTIONS
+
+Generate the complete source code for both frontend and backend.
+
+Include:
+1. Every required source file
+2. Full dependency files
+3. Database initialization or migrations
+4. Secure admin account creation instructions
+5. Environment variable example file
+6. Model configuration instructions
+7. Sample test data instructions
+8. README with exact Windows VS Code setup steps
+9. Commands to install frontend and backend dependencies
+10. Commands to start both development servers
+11. Localhost URLs
+12. Troubleshooting for Python, npm, YOLO, OpenCV, CORS, database, and video codec errors
+13. Instructions for placing the PPE-trained model in the correct folder
+14. Automated tests or manual testing instructions
+15. Clear separation between working features and future integrations
+
+Provide code that is complete, internally consistent, and runnable—not pseudocode, incomplete snippets, or comments saying “implement this later.”
+
+If output limits prevent generating every file at once, first create the architecture and file manifest, then generate the files in small, clearly labeled batches. Maintain consistent API contracts across batches. Do not silently omit required files.
+
+After generating the code, explain exactly how to create the project in VS Code, where to paste each file, which terminal commands to run, how to create the admin account, how to configure the model, and how to verify that each feature works.
+
+## 21. FINAL ACCEPTANCE CRITERIA
+
+The application is accepted only when:
+
+- The administrator can log in and log out.
+- The manager can upload images and videos.
+- The backend actually processes supported media using the configured YOLOv8 model.
+- PPE results are based on the actual model output and supported class labels.
+- Each upload has a unique analysis record.
+- Different images/videos produce their own individual reports.
+- Supported missing-PPE detections create recorded alerts.
+- The database preserves uploaded media metadata and analysis records after restart.
+- The media gallery shows the actual uploaded files.
+- Individual dashboards display the correct report for the selected upload.
+- The daily analytics dashboard aggregates real records.
+- Filters, navigation, exports, and delete actions work.
+- The UI is responsive.
+- The application communicates model limitations instead of inventing results.
+- The README provides working local setup instructions.
+
+Build this as a reliable local development project first, with a clear path to deployment. Prioritize correctness, security, actual YOLOv8 inference, distinct analysis results, and usable dashboards over decorative features.
